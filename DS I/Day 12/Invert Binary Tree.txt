@@ -1,0 +1,17 @@
+class Solution {
+public:
+    TreeNode *invertTree(TreeNode *root) {
+        stack<TreeNode *> st;
+        st.push(root);
+        while (!st.empty()) {
+            auto node = st.top();
+            st.pop();
+            if (node) {
+                swap(node->left, node->right);
+                st.push(node->left);
+                st.push(node->right);
+            }
+        }
+        return root;
+    }
+};

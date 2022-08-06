@@ -1,0 +1,20 @@
+class Solution:
+    def permuteUnique(self, n: List[int]) -> List[List[int]]:
+        N = len(n)
+        n.sort()
+        s = []
+        res = []
+        visited = [False] * N
+        def dfs(n: List[int], path: List[int], d: int, visited: List[bool]):
+            if d == N:
+                res.append(path)
+            else:
+                for i in range(N):
+                    if i != 0 and n[i] == n[i - 1] and not visited[i - 1] or visited[i]:
+                        continue
+                    else:
+                        visited[i] = True
+                        dfs(n, path + [n[i]], d + 1, visited)
+                        visited[i] = False
+        dfs(n, [], 0, visited)
+        return res
